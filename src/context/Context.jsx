@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const ShoppingCartContext = createContext(null)
 
@@ -15,7 +15,9 @@ function ShoppingCartProvider({children}){
         }
     }
 
-    
+    useEffect(() => {
+        fetchProducts()
+    },[])    
     return (
         <ShoppingCartContext.Provider value={{ products,loading }}>{children}</ShoppingCartContext.Provider>
     )
