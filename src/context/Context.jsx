@@ -4,7 +4,7 @@ export const ShoppingCartContext = createContext(null)
 
 function ShoppingCartProvider({children}){
     return (
-        <ShoppingCartContext.Provider value={}>{children}</ShoppingCartContext.Provider>
+        <ShoppingCartContext.Provider value={{}}>{children}</ShoppingCartContext.Provider>
     )
 }
 
