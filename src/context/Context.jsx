@@ -5,6 +5,7 @@ export const ShoppingCartContext = createContext(null)
 function ShoppingCartProvider({children}){
     const [products,setProducts] = useState([])
     const [loading,setLoading] = useState(true)
+    const [cartItems,setCartItems] = useState([])
     async function fetchProducts(){
         const apiRequest = await fetch("https://dummyjson.com/products")
         const apiResponse = await apiRequest.json()
@@ -13,6 +14,23 @@ function ShoppingCartProvider({children}){
             setProducts(apiResponse?.products)
             setLoading(false)
         }
+    }
+
+    function handleAddItemsTocart(getProducts){
+        let copyExistingCartItem = [...cartItems]
+        const findCartItems = copyExistingCartItem.findIndex((item) => item.id === getProducts.id)
+
+        if (findCartItems === -1) {
+            copyExistingCartItem.push({
+                ...getProducts,
+                quantity: 1,
+                totalPrice: getProducts?.price
+            })
+        } else {
+            console.log("Item already added")
+        }
+
+        setCartItems(copyExistingCartItem)
     }
 
     useEffect(() => {
