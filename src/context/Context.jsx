@@ -29,7 +29,11 @@ function ShoppingCartProvider({children}){
                 totalPrice: getProducts?.price
             })
         } else {
-            console.log("Item already added")
+            copyExistingCartItem[findCartItems] = {
+                ...copyExistingCartItem[findCartItems],
+                quantity: copyExistingCartItem[findCartItems].quantity + 1,
+                totalPrice: ((copyExistingCartItem[findCartItems].quantity + 1) * copyExistingCartItem[findCartItems].price)
+            }
         }
 
         setCartItems(copyExistingCartItem)
@@ -50,6 +54,7 @@ function ShoppingCartProvider({children}){
                 totalPrice: ((copyExistingCartItem[findCartItems].quantity - 1) * copyExistingCartItem[findCartItems].price)
             }
         }
+
         localStorage.setItem("items",JSON.stringify(copyExistingCartItem))
         setCartItems(copyExistingCartItem)
     }
