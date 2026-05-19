@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const ShoppingCartContext = createContext(null)
 
@@ -6,6 +7,7 @@ function ShoppingCartProvider({children}){
     const [products,setProducts] = useState([])
     const [loading,setLoading] = useState(true)
     const [cartItems,setCartItems] = useState([])
+    const navigate = useNavigate()
     async function fetchProducts(){
         const apiRequest = await fetch("https://dummyjson.com/products")
         const apiResponse = await apiRequest.json()
@@ -31,6 +33,8 @@ function ShoppingCartProvider({children}){
         }
 
         setCartItems(copyExistingCartItem)
+        localStorage.setItem("items",JSON.stringify(copyExistingCartItem))
+        navigate("/cart")
     }
 
     useEffect(() => {
