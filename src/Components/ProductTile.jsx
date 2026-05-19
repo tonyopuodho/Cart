@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ShoppingCartContext } from '../context/Context'
 
 function ProductTile({products}) {
-  const { handleAddItemsTocart } = useContext(ShoppingCartContext)
+  const { handleAddItemsTocart,cartItems } = useContext(ShoppingCartContext)
   return (
     <div className='bg-gray-200 shadow-md rounded-md p-2 flex flex-col'>
         <div className='w-full'>
