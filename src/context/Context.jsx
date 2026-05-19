@@ -41,7 +41,7 @@ function ShoppingCartProvider({children}){
         fetchProducts()
     },[])    
     return (
-        <ShoppingCartContext.Provider value={{ products,loading }}>{children}</ShoppingCartContext.Provider>
+        <ShoppingCartContext.Provider value={{ products,loading,handleAddItemsTocart,cartItems }}>{children}</ShoppingCartContext.Provider>
     )
 }
 
