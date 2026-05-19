@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from 'react'
 import { ShoppingCartContext } from '../context/Context'
 
 function CartTile({item}) {
-    const { handleAddItemsTocart,cartItems} = useContext(ShoppingCartContext)
+    const { handleAddItemsTocart,cartItems, handleRemoveItemsFromCart } = useContext(ShoppingCartContext)
   return (
     <Fragment>
         <div className='grid grid-cols-3 items-start gap-5'>
@@ -12,7 +12,7 @@ function CartTile({item}) {
             </div>
             <div>
                 <h1 className='text-base font-bold text-gray-900'>{item?.title}</h1>
-                <button className='py-2 px-6 bg-black text-white cursor-pointer rounded-md text-sm'>Remove</button>
+                <button onClick={() => handleRemoveItemsFromCart(item,true)} className='py-2 px-6 bg-black text-white cursor-pointer rounded-md text-sm'>Remove</button>
             </div>
         </div>
          <div className='ml-auto'>
@@ -22,6 +22,7 @@ function CartTile({item}) {
             <p className='font-extrabold text-gray-800'>Quantity: {item?.quantity}</p>
             <div className='mt-2 flex gap-2'>
                 <button
+                onClick={() => handleRemoveItemsFromCart(item,false)}
                 disabled = {item.quantity === 1}
                 className='disabled:opacity-40 border px-4 cursor-pointer'>-</button>
                 <button onClick={() => handleAddItemsTocart(item)} className='border px-4 cursor-pointer'>+</button>

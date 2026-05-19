@@ -50,7 +50,8 @@ function ShoppingCartProvider({children}){
                 totalPrice: ((copyExistingCartItem[findCartItems].quantity - 1) * copyExistingCartItem[findCartItems].price)
             }
         }
-
+        localStorage.setItem("items",JSON.stringify(copyExistingCartItem))
+        setCartItems(copyExistingCartItem)
     }
 
     useEffect(() => {
@@ -58,7 +59,7 @@ function ShoppingCartProvider({children}){
         setCartItems(JSON.parse(localStorage.getItem("items")) || [])
     },[])    
     return (
-        <ShoppingCartContext.Provider value={{ products,loading,handleAddItemsTocart,cartItems }}>{children}</ShoppingCartContext.Provider>
+        <ShoppingCartContext.Provider value={{ products,loading,handleAddItemsTocart,cartItems, handleRemoveItemsFromCart }}>{children}</ShoppingCartContext.Provider>
     )
 }
 
