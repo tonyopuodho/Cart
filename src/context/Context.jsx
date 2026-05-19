@@ -37,8 +37,25 @@ function ShoppingCartProvider({children}){
         navigate("/cart")
     }
 
+    function handleRemoveItemsFromCart(getProducts,isFullyRemoved){
+        let copyExistingCartItem = [...cartItems]
+        const findCartItems = copyExistingCartItem.findIndex((item) => item.id === getProducts.id)
+
+        if (isFullyRemoved) {
+            copyExistingCartItem.splice(findCartItems,1)
+        } else {
+            copyExistingCartItem[findCartItems] = {
+                ...copyExistingCartItem[findCartItems],
+                quantity: copyExistingCartItem[findCartItems].quantity - 1,
+                totalPrice: ((copyExistingCartItem[findCartItems].quantity - 1) * copyExistingCartItem[findCartItems].price)
+            }
+        }
+
+    }
+
     useEffect(() => {
         fetchProducts()
+        setCartItems(JSON.parse(localStorage.getItem("items")) || [])
     },[])    
     return (
         <ShoppingCartContext.Provider value={{ products,loading,handleAddItemsTocart,cartItems }}>{children}</ShoppingCartContext.Provider>
